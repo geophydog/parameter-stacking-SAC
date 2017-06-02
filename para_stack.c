@@ -26,7 +26,7 @@ int main ( int argc, char *argv[] ) {
     if ( argc != 3 ) {
         fprintf(stderr,"Usage: para_stack <parameter_file> <stacking_out_SAC_name>\n");
         fprintf(stderr,"          return stacked out SAC file\n");
-        fprintf(stderr,"          <parameter_file> Containing 3 columns:\n");
+        fprintf(stderr,"          <parameter_file> Containing 4 columns:\n");
         fprintf(stderr,"          SAC_file weighting_factors shift_time Nth_power\n");
         exit(1);
     }
