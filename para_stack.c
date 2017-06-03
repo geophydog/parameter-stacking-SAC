@@ -1,5 +1,9 @@
 /*---------------------------------------------------------
- ---    2017-6-2 Intially coded by Xuping Feng @NJU     ---
+----    2017-6-2 Intially coded by Xuping Feng @NJU     ---
+----SAC_file: name of inputing SAC format file name     ---
+----weighting_factor: weighting factor of SAC files     ---
+----shift_time: shift time of SAC files                 ---
+----Nth_power: power of inputing SAC files              ---
 ----------------------------------------------------------*/
 
 #include <stdio.h>
@@ -26,8 +30,8 @@ int main ( int argc, char *argv[] ) {
     if ( argc != 3 ) {
         fprintf(stderr,"Usage: para_stack <parameter_file> <stacking_out_SAC_name>\n");
         fprintf(stderr,"          return stacked out SAC file\n");
-        fprintf(stderr,"          <parameter_file> Containing 4 columns:\n");
-        fprintf(stderr,"          SAC_file weighting_factors shift_time Nth_power\n");
+        fprintf(stderr,"          <parameter_file> Containing parameters of 4 columns :\n");
+        fprintf(stderr,"          1:SAC_file 2:weighting_factor 3:shift_time 4:Nth_power\n");
         exit(1);
     }
 
