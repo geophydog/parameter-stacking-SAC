@@ -46,18 +46,21 @@ int main ( int argc, char *argv[] ) {
             for ( i = 0; i < npts; i ++ )
                 sum[i] = 0.;
         }
-        shift_index = (int)(shift_time/delta);
-        for ( i = 0; i < npts; i ++ ) {
-            if ( shift_index >= 0 ) {
-                if ( i < shift_index ) sum[i] += 0.;
-                else sum[i] += sign(data[i-shift_index])*weight*pow(fabs(data[i-shift_index]),power);
+        if ( isnan(hd.depmax) != 1 ) {
+            shift_index = (int)(shift_time/delta);
+            for ( i = 0; i < npts; i ++ ) {
+                if ( shift_index >= 0 ) {
+                    if ( i < shift_index ) sum[i] += 0.;
+                    else sum[i] += sign(data[i-shift_index])*weight*pow(fabs(data[i-shift_index]),power);
+                }
+                else if ( shift_index < 0 && (i - shift_index) < npts )
+                    sum[i] += sign(data[i-shift_index])*weight*pow(fabs(data[i-shift_index]),power);
+                else if ( shift_index < 0 && (i - shift_index) >= npts )
+                    sum[i] += 0.;
             }
-            else if ( shift_index < 0 && (i - shift_index) < npts )
-                sum[i] += sign(data[i-shift_index])*weight*pow(fabs(data[i-shift_index]),power);
-            else if ( shift_index < 0 && (i - shift_index) >= npts )
-                sum[i] += 0.;
-        count += 1;
         }
+        else continue;
+        count += 1;
     }
     write_sac(argv[2], hd, sum);
     free(ss); free(sum); free(data);
